@@ -18,7 +18,7 @@ def main():
             content[i][j] = content[i][j].strip(" ").replace("  ",",").replace(" ",",").split(",")
     
     print(Fore.GREEN)
-    tprint('Aoc Day 3' + "\U0001F385")
+    tprint('Aoc Day 4' + "\U0001F385")
     print(Fore.CYAN + Back.RESET)
     print(Fore.BLUE + tabulate.tabulate([["Part 1: ", part1(content)],["Part 2: ", part2(content)]]))
     print (Style.RESET_ALL + '[Finished in {:.4f}ms]'.format(1000*(time.time() - startTime)),"\U0001F605")
