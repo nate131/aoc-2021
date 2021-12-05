@@ -25,24 +25,23 @@ def part1(content):
     matrix = {}
     for i,line in enumerate(content):
         m = re.search(pattern,line)
+        minx = int(m.group("x1"))
+        maxx = int(m.group("x2"))
+        miny = int(m.group("y1"))
+        maxy = int(m.group("y2"))
         # find if increment or decrement 
-        if int(m.group("x1")) <= int(m.group("x2")):
-            xmod = 1
-        else:
-            xmod = -1
-        if int(m.group("y1")) <= int(m.group("y2")):
-            ymod = 1
-        else:
-            ymod = -1
+        xmod = 1 if int(minx) <= int(maxx) else -1
+        ymod = 1 if int(miny) <= int(maxy) else -1
         # skip if diagonal
-        if m.group("x1") == m.group("x2") or m.group("y1") == m.group("y2"):
+        if minx == maxx or miny == maxy:
             # loop over lines and add x,y to dictionary (+1 each time to find crossing lines)
-            for j in range(int(m.group("x1")),int(m.group("x2"))+xmod,xmod):
-                for k in range(int(m.group("y1")),int(m.group("y2"))+ymod,ymod):
-                    if matrix.get(str(j)+","+str(k)):
-                        matrix[str(j)+","+str(k)] = matrix[str(j)+","+str(k)] + 1
+            for j in range(int(minx),int(maxx)+xmod,xmod):
+                for k in range(int(miny),int(maxy)+ymod,ymod):
+                    key = str(j)+","+str(k)
+                    if matrix.get(key):
+                        matrix[key] = matrix[key] + 1
                     else:
-                        matrix[str(j)+","+str(k)] = 1
+                        matrix[key] = 1
     answer = 0
     for k,v in matrix.items():
         if v > 1:
@@ -55,23 +54,23 @@ def part2(content):
     matrix = {}
     for i,line in enumerate(content):
         m = re.search(pattern,line)
+        minx = int(m.group("x1"))
+        maxx = int(m.group("x2"))
+        miny = int(m.group("y1"))
+        maxy = int(m.group("y2"))
         # find if increment or decrement 
-        if int(m.group("x1")) <= int(m.group("x2")):
-            xmod = 1
-        else:
-            xmod = -1
-        if int(m.group("y1")) <= int(m.group("y2")):
-            ymod = 1
-        else:
-            ymod = -1
-        # if line not diagonal use p1 logic
-        if m.group("x1") == m.group("x2") or m.group("y1") == m.group("y2"):
-            for j in range(int(m.group("x1")),int(m.group("x2"))+xmod,xmod):
-                for k in range(int(m.group("y1")),int(m.group("y2"))+ymod,ymod):
-                    if matrix.get(str(j)+","+str(k)):
-                        matrix[str(j)+","+str(k)] = matrix[str(j)+","+str(k)] + 1
+        xmod = 1 if int(minx) <= int(maxx) else -1
+        ymod = 1 if int(miny) <= int(maxy) else -1
+        # skip if diagonal
+        if minx == maxx or miny == maxy:
+            # loop over lines and add x,y to dictionary (+1 each time to find crossing lines)
+            for j in range(int(minx),int(maxx)+xmod,xmod):
+                for k in range(int(miny),int(maxy)+ymod,ymod):
+                    key = str(j)+","+str(k)
+                    if matrix.get(key):
+                        matrix[key] = matrix[key] + 1
                     else:
-                        matrix[str(j)+","+str(k)] = 1
+                        matrix[key] = 1
         # if line diagonal
         else:
             minx = int(m.group("x1"))
