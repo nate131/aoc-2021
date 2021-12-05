@@ -30,13 +30,13 @@ def part1(content):
         miny = int(m.group("y1"))
         maxy = int(m.group("y2"))
         # find if increment or decrement 
-        xmod = 1 if int(minx) <= int(maxx) else -1
-        ymod = 1 if int(miny) <= int(maxy) else -1
+        xmod = 1 if minx <= maxx else -1
+        ymod = 1 if miny <= maxy else -1
         # skip if diagonal
         if minx == maxx or miny == maxy:
             # loop over lines and add x,y to dictionary (+1 each time to find crossing lines)
-            for j in range(int(minx),int(maxx)+xmod,xmod):
-                for k in range(int(miny),int(maxy)+ymod,ymod):
+            for j in range(minx,maxx+xmod,xmod):
+                for k in range(miny,maxy+ymod,ymod):
                     key = str(j)+","+str(k)
                     if matrix.get(key):
                         matrix[key] = matrix[key] + 1
@@ -59,13 +59,13 @@ def part2(content):
         miny = int(m.group("y1"))
         maxy = int(m.group("y2"))
         # find if increment or decrement 
-        xmod = 1 if int(minx) <= int(maxx) else -1
-        ymod = 1 if int(miny) <= int(maxy) else -1
+        xmod = 1 if minx <= maxx else -1
+        ymod = 1 if miny <= maxy else -1
         # skip if diagonal
         if minx == maxx or miny == maxy:
             # loop over lines and add x,y to dictionary (+1 each time to find crossing lines)
-            for j in range(int(minx),int(maxx)+xmod,xmod):
-                for k in range(int(miny),int(maxy)+ymod,ymod):
+            for j in range(minx,maxx+xmod,xmod):
+                for k in range(miny,maxy+ymod,ymod):
                     key = str(j)+","+str(k)
                     if matrix.get(key):
                         matrix[key] = matrix[key] + 1
@@ -73,17 +73,14 @@ def part2(content):
                         matrix[key] = 1
         # if line diagonal
         else:
-            minx = int(m.group("x1"))
-            maxx = int(m.group("x2"))
-            miny = int(m.group("y1"))
-            maxy = int(m.group("y2"))
             diff = abs(minx - maxx)
             # increment/decrement using x/ymod once per line length and add to x,y dictionary
             for c in range(diff+1):
-                if matrix.get(str(minx)+","+str(miny)):
-                    matrix[str(minx)+","+str(miny)] = matrix[str(minx)+","+str(miny)] + 1
+                key = str(minx)+","+str(miny)
+                if matrix.get(key):
+                    matrix[key] = matrix[key] + 1
                 else:
-                    matrix[str(minx)+","+str(miny)] = 1
+                    matrix[key] = 1
                 minx = minx + xmod
                 miny = miny + ymod
     answer = 0
