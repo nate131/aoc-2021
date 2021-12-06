@@ -15,7 +15,7 @@ def main():
     for i in range(1,len(content)):
         content[i] = content[i].split("\n")
         for j in range(len(content[i])):
-            content[i][j] = content[i][j].strip(" ").replace("  ",",").replace(" ",",").split(",")
+            content[i][j] = content[i][j].strip(" ").replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ").replace(" ",",").split(",")
     
     print(Fore.GREEN)
     tprint('Aoc Day 4' + "\U0001F385")
@@ -37,15 +37,19 @@ def part1(content):
                     if cards[c_index][r_index].count('x') == len(cards[c_index][r_index]):
                         bingo=bing_num
                     # Vertical Bingo
-                    if [row_s[row_index] for row_s in cards[c_index]].count("x") == len([row_s[row_index] for row_s in cards[c_index]]):
-                        bingo=bing_num
-                    if bingo:
-                        counter = 0
-                        for r_index, row in enumerate(card):
-                            for num in row:
-                                if num != "x":
-                                    counter = counter + int(num)
-                        return int(bing_num) * counter
+                    try:
+                        if [row_s[row_index] for row_s in cards[c_index]].count("x") == len([row_s[row_index] for row_s in cards[c_index]]):
+                            bingo=bing_num
+                        if bingo:
+                            counter = 0
+                            for r_index, row in enumerate(card):
+                                for num in row:
+                                    if num != "x":
+                                        counter = counter + int(num)
+                            return int(bing_num) * counter
+                    except:
+                        print(card)
+                        exit()
 
 def part2(content):
     bingo=False
