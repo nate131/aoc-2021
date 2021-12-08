@@ -20,13 +20,15 @@ def main():
     print (Style.RESET_ALL + '[Finished in {:.4f}ms]'.format(1000*(time.time() - startTime)),"\U0001F605")
 
 def part1(content):
-    fuels = []
+    min_fuel = 0
     for i in tqdm(range(min(content),max(content)+1),ncols=90,desc="Part 1 \U0001F914",unit_scale=True):
         fuel = 0
         for crab_pos in content:
-            fuel = fuel + abs(crab_pos - i)
-        fuels.append(fuel)
-    return min(fuels)
+            distance = abs(crab_pos - i)
+            fuel = fuel + distance
+            #fuel = fuel + sum(range(1,abs(crab_pos - i)+1))
+        if fuel < min_fuel or i == 0: min_fuel = fuel
+    return min_fuel
 
 def part2(content):
     min_fuel = 0
