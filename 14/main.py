@@ -18,7 +18,7 @@ def main():
     tprint('Aoc Day '+ os.path.basename(os.path.dirname(os.path.realpath(__file__))) + "\U0001F385")
     print(Fore.CYAN + Back.RESET)
     print(Fore.BLUE + tabulate.tabulate([["Part 1: ", part1(content)],["Part 2: ", part2(content)]]))
-    print (Style.RESET_ALL + '[Finished in {:.4f}ms]'.format(1000*(time.time() - startTime)),"\U0001F605")
+    print (Style.RESET_ALL + '[Finished in {:.4f}ms]'.format(1000*(time.time() - startTime)),"("+format((round(time.time() - startTime,2)))+"s)","\U0001F605")
 
 def part1(content):
     polymer = content[0]
@@ -56,7 +56,7 @@ def part2(content):
             poly_dict[r[0][0] + r[1]] = 0
         if r[1] + r[0][1] not in poly_dict:
             poly_dict[r[1] + r[0][1]] = 0
-    for i in range(40):
+    for i in tqdm(range(40),ncols=90,desc="Part 2 \U0001F914",unit_scale=True):
         actions = {}
         del_list = []
         for i in range(len(rule_list)):
@@ -87,10 +87,8 @@ def part2(content):
         letter_dict[key[0]] = letter_dict[key[0]] + value
         letter_dict[key[1]] = letter_dict[key[1]] + value
     
-    #print(letter_dict)
     most_common = letter_dict[max(letter_dict, key=letter_dict.get)]
     least_common = letter_dict[min(letter_dict, key=letter_dict.get)]
-    #print(most_common, least_common)
     return ((most_common-least_common+1)//2)
 
 
