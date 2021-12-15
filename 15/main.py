@@ -54,7 +54,7 @@ def go(x,y,pathway):
     for x,xval in enumerate(pathway):
         prev.append([1000000 for val in xval])
     distance[0][0] = 0
-    for test in range(6):
+    for test in range(7):
         for iter in range(len(pathway)+1):
             for x in range(iter):
                 y=iter-1
