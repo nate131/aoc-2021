@@ -16,7 +16,7 @@ def main():
     print(Fore.GREEN)
     tprint('Aoc Day '+ os.path.basename(os.path.dirname(os.path.realpath(__file__))) + "\U0001F385")
     print(Fore.CYAN + Back.RESET)
-    print(Fore.BLUE + tabulate.tabulate([["Part 1: ", part1(content)],["Part 2: ", part2(content)]]))
+    print(Fore.BLUE + tabulate.tabulate([["Part 1: ", ""],["Part 2: ", part2(content)]]))
     print (Style.RESET_ALL + '[Finished in {:.4f}ms]'.format(1000*(time.time() - startTime)),"\U0001F605")
 
 def part1(content):
@@ -26,9 +26,7 @@ def part1(content):
     maxx = 0
     maxy = 0
     for line in points.split('\n'):
-        #print(line)
         point = line.split(",")
-        #print(point)
         if maxx < int(point[0]): maxx=int(point[0])
         if maxy < int(point[1]): maxy=int(point[1])
     y_list = []
@@ -45,7 +43,6 @@ def part1(content):
     
     fold_list = []
     for folds in content[1].split('\n'):
-        #print(folds)
         fold_list.append(folds.split(' ')[-1].split('='))
     
     for folds in fold_list:
@@ -126,7 +123,10 @@ def part2(content):
             top_half = y_list[:int(folds[1])]
             bottom_half = y_list[int(folds[1])+1:]
             bottom_half.reverse()
-            
+
+            #print(maxx,maxy)
+            #print("top ",len(top_half))
+            #print("bottom ",len(bottom_half))            
             new_board = []
             
             for y,yval in enumerate(top_half):
@@ -142,7 +142,9 @@ def part2(content):
             top_half = [x[:int(folds[1])] for x in y_list]
             bottom_half = [x[int(folds[1])+1:] for x in y_list]
             bottom_half = [x[::-1] for x in bottom_half]
-            
+            #print(maxx,maxy)
+            #print("left ",len(top_half))
+            #print("right ",len(bottom_half))
             new_board = []
             
             for y,yval in enumerate(top_half):
