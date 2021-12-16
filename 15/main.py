@@ -37,10 +37,8 @@ def print_path(pathway):
             if [x,y] in final_path:
                 strr += " x"+str(yval)
             else: strr += " "+str(yval)
-        print(strr)
+        #print(strr)
 
-min_score = 470 # 470
-last_printout = time.time()
 prev = []
 distance = []
 
@@ -74,6 +72,8 @@ def go(x,y,pathway):
                             if distance[option[0]][option[1]] > distance[x][y] + int(pathway[option[0]][option[1]]):
                                 distance[option[0]][option[1]] = distance[x][y] + int(pathway[option[0]][option[1]])
                                 prev[option[0]][option[1]] = [x,y]
+    #print(distance)
+    #print(prev)
     #print_path(distance)
 
 
