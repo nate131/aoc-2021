@@ -111,7 +111,7 @@ def part1(content):
     start = content[0]
     #print(start)
     #print(content[1])
-    for add_pair,pair_val in enumerate(content):
+    for add_pair,pair_val in enumerate(tqdm(content,ncols=90,desc="Part 1 \U0001F914",unit_scale=True)):
         if add_pair == 0:
             continue
         next = add_fish(start,content[add_pair])
@@ -122,7 +122,7 @@ def part1(content):
 def part2(content):
     global temp
     mag_list = []
-    for first_pair,f_val in enumerate(content):
+    for first_pair,f_val in enumerate(tqdm(content,ncols=90,desc="Part 2 \U0001F914",unit_scale=True)):
         for second_pair,s_val in enumerate(content):
             temp = ""
             if first_pair == second_pair: continue
