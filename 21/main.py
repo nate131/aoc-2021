@@ -26,14 +26,14 @@ def part1(content):
     player_data = {}
     board_segments = 10
     num_dice = 3
-    print(board_segments)
+    #print(board_segments)
     for line,data in enumerate(content):
         player_data[line] = {}
         player_data[line]['start'] = int(data.split(" ")[-1])
         player_data[line]['current'] = int(data.split(" ")[-1])
         player_data[line]['score'] = 0
         player_data[line]['wins'] = 0
-    print(player_data)
+    #print(player_data)
     turns = 1
     while max([x['score'] for x in player_data.values()]) < 1000:
         player_offset = 0
@@ -60,9 +60,9 @@ def part2(content):
         player_data[line]['current'] = int(data.split(" ")[-1])
         player_data[line]['score'] = 0
         player_data[line]['identicality'] = 1
+        player_data['identicality'] = 1
     roll_dice(player_data,0)
-    print(winners)
-    print(universes)
+    return max(winners)
 
 winners = [0,0]
 universes = 0
@@ -79,12 +79,12 @@ def roll_dice(player_data,turn):
     player_data[turn]['score'] += player_data[turn]['current']
     # - if win, increment win count for player
     if player_data[turn]['score'] >= 21: 
-        winners[turn] += player_data[turn]['identicality'] + 1
+        winners[turn] += player_data['identicality']
     # - multiply current identicality by number of occurances of this event and do the next players roll with current player data
-    player_data[turn]['identicality'] = player_data[turn]['identicality'] * 1
+    player_data['identicality'] = player_data['identicality'] * 1
     if player_data[turn]['score'] < 21: roll_dice(copy.deepcopy(player_data),next_turn)
     # - Rollback the identicality score and player score to calculate if rolled 1 higher
-    player_data[turn]['identicality'] = player_data[turn]['identicality'] / 1
+    player_data['identicality'] = player_data['identicality'] / 1
     player_data[turn]['score'] -= player_data[turn]['current']
 
     # Roll 4, 3 occurance
@@ -92,11 +92,11 @@ def roll_dice(player_data,turn):
     if player_data[turn]['current'] == 0: player_data[turn]['current'] = 10
     player_data[turn]['score'] += player_data[turn]['current']
     if player_data[turn]['score'] >= 21: 
-        winners[turn] += player_data[turn]['identicality'] + 3
-    player_data[turn]['identicality'] = player_data[turn]['identicality'] * 3
+        winners[turn] += player_data['identicality'] * 3
+    player_data['identicality'] = player_data['identicality'] * 3
     
     if player_data[turn]['score'] < 21: roll_dice(copy.deepcopy(player_data),next_turn)
-    player_data[turn]['identicality'] = player_data[turn]['identicality'] / 3
+    player_data['identicality'] = player_data['identicality'] / 3
     player_data[turn]['score'] -= player_data[turn]['current']
 
     # Roll 5, 6 occurance
@@ -104,11 +104,11 @@ def roll_dice(player_data,turn):
     if player_data[turn]['current'] == 0: player_data[turn]['current'] = 10
     player_data[turn]['score'] += player_data[turn]['current']
     if player_data[turn]['score'] >= 21: 
-        winners[turn] += player_data[turn]['identicality'] + 6
-    player_data[turn]['identicality'] = player_data[turn]['identicality'] * 6
+        winners[turn] += player_data['identicality'] * 6
+    player_data['identicality'] = player_data['identicality'] * 6
     
     if player_data[turn]['score'] < 21: roll_dice(copy.deepcopy(player_data),next_turn)
-    player_data[turn]['identicality'] = player_data[turn]['identicality'] / 6
+    player_data['identicality'] = player_data['identicality'] / 6
     player_data[turn]['score'] -= player_data[turn]['current']
     
     # Roll 6, 7 occurance
@@ -116,11 +116,11 @@ def roll_dice(player_data,turn):
     if player_data[turn]['current'] == 0: player_data[turn]['current'] = 10
     player_data[turn]['score'] += player_data[turn]['current']
     if player_data[turn]['score'] >= 21: 
-        winners[turn] += player_data[turn]['identicality'] + 7
-    player_data[turn]['identicality'] = player_data[turn]['identicality'] * 7
+        winners[turn] += player_data['identicality'] * 7
+    player_data['identicality'] = player_data['identicality'] * 7
     
     if player_data[turn]['score'] < 21: roll_dice(copy.deepcopy(player_data),next_turn)
-    player_data[turn]['identicality'] = player_data[turn]['identicality'] / 7
+    player_data['identicality'] = player_data['identicality'] / 7
     player_data[turn]['score'] -= player_data[turn]['current']
     
     # Roll 7, 6 occurance
@@ -128,11 +128,11 @@ def roll_dice(player_data,turn):
     if player_data[turn]['current'] == 0: player_data[turn]['current'] = 10
     player_data[turn]['score'] += player_data[turn]['current']
     if player_data[turn]['score'] >= 21: 
-        winners[turn] += player_data[turn]['identicality'] + 6
-    player_data[turn]['identicality'] = player_data[turn]['identicality'] * 6
+        winners[turn] += player_data['identicality'] * 6
+    player_data['identicality'] = player_data['identicality'] * 6
     
     if player_data[turn]['score'] < 21: roll_dice(copy.deepcopy(player_data),next_turn)
-    player_data[turn]['identicality'] = player_data[turn]['identicality'] / 6
+    player_data['identicality'] = player_data['identicality'] / 6
     player_data[turn]['score'] -= player_data[turn]['current']
    
     # Roll 8, 3 occurance
@@ -140,11 +140,11 @@ def roll_dice(player_data,turn):
     if player_data[turn]['current'] == 0: player_data[turn]['current'] = 10
     player_data[turn]['score'] += player_data[turn]['current']
     if player_data[turn]['score'] >= 21: 
-        winners[turn] += player_data[turn]['identicality'] + 3
-    player_data[turn]['identicality'] = player_data[turn]['identicality'] * 3
+        winners[turn] += player_data['identicality'] * 3
+    player_data['identicality'] = player_data['identicality'] * 3
     
     if player_data[turn]['score'] < 21: roll_dice(copy.deepcopy(player_data),next_turn)
-    player_data[turn]['identicality'] = player_data[turn]['identicality'] / 3
+    player_data['identicality'] = player_data['identicality'] / 3
     player_data[turn]['score'] -= player_data[turn]['current']
     
     # Roll 9, 1 occurance
@@ -152,7 +152,7 @@ def roll_dice(player_data,turn):
     if player_data[turn]['current'] == 0: player_data[turn]['current'] = 10
     player_data[turn]['score'] += player_data[turn]['current']
     if player_data[turn]['score'] >= 21: 
-        winners[turn] += player_data[turn]['identicality'] + 1
+        winners[turn] += player_data['identicality']
         #print(universes,player_data)
     if player_data[turn]['score'] < 21: roll_dice(copy.deepcopy(player_data),next_turn)
     
